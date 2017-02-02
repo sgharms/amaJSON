@@ -42,6 +42,7 @@ the `src` directory and put it somewhere on your hard disk. You might want to
 rename the directory to something like `amaJSON` or `kindle_exporter`.
 
 1. Navigate to  `chrome://extensions`
+1. Click the checkbox in the top right to enable "Developer Mode."
 1. Click "Load unpacked extension..."
 1. Provide the path to the `src` directory.
 1. Reload your Kindle notes page. You should now be able to click on a book title and export it.
