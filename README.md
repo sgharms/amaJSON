@@ -1,39 +1,54 @@
 # amaJSON
-A chrome extension for exporting notes on a book as JSON
 
-## Status
+## Synopsis
 
-Early release to get it out the door. Not entirely reliable, not entirely clean. Still very proof of concept but, hey, works on my machine :)
+A Chrome extension for exporting Amazon Kindle highlights and notes on a book as JSON. Thus "Ama(zon) + JSON" = "amaJSON".
+
+Also, _ama_ is second-person imparative for "Love!" in Latin. And we all love
+JSON.
 
 ## Usage
 
-### Scroll to find the book you want to export.
+### Select a Book from Your Library
 
-![Scrolling to "The Breakdown of Consciousness"](./img/1.png)
+![Scrolling to "A Mind at Play"](./img/1.png)
 
-### Scroll down to the _following_ book
+_NOTE_: If you take a great number of notes or have a great number of highlights, Amazon may do a lazy-load. To be sure, scroll to the bottom of the book's page to make sure everything is loaded. Their default load has been sufficient for my uses though.
 
-![Scrolling to the following book](./img/2.png)
+### Click for a Context Menu
 
-You need all the notes for the book you want to appear on the screen. Amazon loads notes bit-by-bit. To make sure you export everything, be sure to have all the notes on screen.
+![Context Clicking](./img/2.png)
 
-### Scroll back _up_ to the book title you want
+### Alert for Confirmation
 
-### Right Click
-
-![Scrolling to the following book](./img/3.png)
-
-### Choose AmaJSON export
-
-![Scrolling to the following book](./img/3.png)
-
-### Alert
-
-Alerts will tell you whether the copy was successful. You might run into a bug here that tells you to do the last step again. Do so!
+![Alert](./img/3.png)
 
 ### Viol&agrave;
 
-You now have a JSON representation of your book notes. I save mine to a file. If you want to see a pretty-printed version of the structure of your notes. Feed the contents of your clipboard into http://jsonprettyprint.com
+You now have a JSON representation of your book notes. I save mine to a file in
+a git repository for review / search etc. Here's a sample of the output:
+
+```json
+  "title": "A Mind at Play: How Claude Shannon Invented the Information Age",
+  "author": "Jimmy Soni and Rob Goodman",
+  "highlightCount": "65",
+  "noteCount": "7",
+  "annotations": [
+    {
+      "highlight": "But before Shannon, there was precious little sense of
+information as an idea, a measurable quantity, an object fitted out for hard
+science. Before Shannon, information was a telegram, a photograph, a paragraph,
+a song. After Shannon, information was entirely abstracted into bits.",
+      "location": 69,
+      "annotation": ""
+    },
+    {
+      "highlight": "they could be used to evaluate any logical statement we
+could think of, could even appear to “decide.”",
+      "location": 82,
+      "annotation": ""
+    },
+```
 
 ## Installation
 
@@ -45,11 +60,8 @@ rename the directory to something like `amaJSON` or `kindle_exporter`.
 1. Click the checkbox in the top right to enable "Developer Mode."
 1. Click "Load unpacked extension..."
 1. Provide the path to the `src` directory.
-1. Reload your Kindle notes page. You should now be able to click on a book title and export it.
+1. Reload your Kindle notes page. You should now be able to use the context menu.
 
 ## Bugs
 
-1. When the page first loads, the export sometimes fails. We should handle this better than with a [hokey alert()](https://github.com/sgharms/amaJSON/issues/1).
-1. [Annoying alerts fire multiple times](https://github.com/sgharms/amaJSON/issues/2)
-1. Should distribute via Chrome store, not Github.
-1. I'm unsure what happens if you have only 1 book.
+File an Issue here if there is a bug
