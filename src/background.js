@@ -2,7 +2,7 @@
 
 const CONTEXT_MENU_CONFIG = {
   "title": "Export notes to JSON",
-  "documentUrlPatterns": ["*://*.amazon.com/notebook"],
+  "documentUrlPatterns": ["*://*.amazon.com/*"],
 }
 
 const REASONABLE_TIMEOUT_FOR_SCREEN_PARSE = 3000;
@@ -50,18 +50,30 @@ function copyText(text) {
  *
  */
 
-function exportToJsonClick(info, tab) {
-  let processPageNodes = new Promise((resolve, reject) => {
+async function injectAmajsonHandler(tab) {
+  return new Promise((resolve, reject) => {
     chrome.tabs.executeScript(tab.id, {
       "file": "amajson.js",
-    }, () => resolve());
-    setTimeout(() => reject(), REASONABLE_TIMEOUT_FOR_SCREEN_PARSE);
-  })
+    }, () => {
+      if (chrome.runtime.lastError) {
+        reject(`Error: ${chrome.runtime.lastError.message}`)
+      } else {
+        resolve()
+      }
+      setTimeout(() => reject(), REASONABLE_TIMEOUT_FOR_SCREEN_PARSE);
+    });
+  });
+}
 
-  processPageNodes.then(() => {
-    chrome.tabs.sendMessage(tab.id, info, function(result) {
-      copyText(result.node);
-    })
+async function exportToJsonClick(info, tab) {
+  try {
+    await injectAmajsonHandler(tab);
+  } catch(err) {
+    console.log(err)
+  }
+
+  chrome.tabs.sendMessage(tab.id, info, function(result) {
+    copyText(result.node);
   })
 }
 
