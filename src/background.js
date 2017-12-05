@@ -2,7 +2,7 @@
 
 const CONTEXT_MENU_CONFIG = {
   "title": "Export notes to JSON",
-  "documentUrlPatterns": ["*://*.amazon.com/notebook"],
+  "documentUrlPatterns": ["*://*.amazon.com/*"],
 }
 
 const REASONABLE_TIMEOUT_FOR_SCREEN_PARSE = 3000;
