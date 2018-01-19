@@ -46,7 +46,7 @@ function Note(highlightNode) {
   let metaDataNode = separatorNode.querySelector("span");
 
   this.highlightText = highlightNode.querySelector("span").innerText;
-  this.kindleLocation = parseInt(metaDataNode.innerText.split(":")[1]);
+  this.kindleLocation = parseInt(separatorNode.querySelector("input").value);
   this.annotationNode = highlightNode.nextElementSibling.querySelector("#note")
 
   if (!!this.annotationNode) {
