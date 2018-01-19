@@ -42,7 +42,8 @@ function Note(highlightNode) {
   let bubbleTil = (node, fn) => {
     return fn(node) ? node : bubbleTil(node.parentElement, fn);
   }
-  let metaDataNode = bubbleTil(highlightNode, n => Array.from(n.classList).includes("kp-notebook-row-separator")).querySelector("span");
+  let separatorNode = bubbleTil(highlightNode, n => Array.from(n.classList).includes("kp-notebook-row-separator"));
+  let metaDataNode = separatorNode.querySelector("span");
 
   this.highlightText = highlightNode.querySelector("span").innerText;
   this.kindleLocation = parseInt(metaDataNode.innerText.split(":")[1]);
